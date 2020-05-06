@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mission to Mars</title>
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+   crossorigin="anonymous">
+</head>
+<body class='text-white'style="background-color:black;" >
+  <div class="container">
+
+    <!-- Jumbotron -->
+    <div class="jumbotron text-center">
+        <h1 class="display-7">Mission to Mars</h1>
+        <a class="btn btn-lg text-white" style="background-color:#2a0ec1;" href="/scrape" role="button">Scrape New
+            Data</a>
+    </div>
+    <!---Mars News scraping-->
+    <div class="container">
+        <h2>Latest Mars News</h2>
+        <h4 style="color:aqua">{{data.nasa_news_title}}</h4>
+        <p>{{data.nasa_news_paragraph}}</p>
+    </div>
+
+    <div class="container">
+      <div class='row'>
+        <div class="col-lg-8 col-md-8 col-sm-6 col-xm-12">
+        <h3>Featured Mars Image</h3>
+        <img src="{{data.full_image_url}}" style="max-width:100%; max-height: auto;" alt="mars image">
+        
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xm-12">
+          <div class="card" style="width: 20rem;">
+            <div class="card-body text-white bg-dark">
+              <h5 class="card-title">Current Weather on Mars</h5>
+              <p class="card-text">{{data.mars_weather}}</p>
+              
+            </div>
+          </div>
+          <!-- Table -->
+          <br>
+          <h5>Mars Facts</h5>
+          <table>{{ data.mars_facts|safe}}</table>
+
+        </div>
+      </div>
+    </div><!---container for image and table closed-->
+    <h3 style="padding-top:30px; text-align: center;">Mars Hemispheres</h3>
+    <div class='card-deck'>
+      <div class='col-md-12'>
+          <div class="row">
+              {% for item in data.hemispheres_img_url %}
+              <div class="col-md-6">
+                  <div class="card text-white bg-dark" style="margin: 30px;">
+                      <img class="card-img-top" src="{{item.img_url}}" />
+                      <div class="card-body">
+                          <p class="card-text">{{ item.title }}</p>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+              
+
+      </div>
+    </div>
+
+
+  </div> <!---body->container closed-->
+</body>
+
+</html>
