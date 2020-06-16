@@ -6,19 +6,18 @@
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
    crossorigin="anonymous">
 </head>
-<body class='text-white'style="background-color:black;" >
+<body class='text-black'style="background-color:white;" >
   <div class="container">
 
     <!-- Jumbotron -->
     <div class="jumbotron text-center">
-        <h1 class="display-7">Mission to Mars</h1>
-        <a class="btn btn-lg text-white" style="background-color:#2a0ec1;" href="/scrape" role="button">Scrape New
-            Data</a>
+        <h1>Mission to Mars</h1>
+        <a class="btn btn-lg text-white" style="background-color:#2a0ec1;" href="/scrape" role="button">Scrape New Data</a>
     </div>
     <!---Mars News scraping-->
     <div class="container">
         <h2>Latest Mars News</h2>
-        <h4 style="color:aqua">{{data.nasa_news_title}}</h4>
+        <h4 style="color:red">{{data.nasa_news_title}}</h4>
         <p>{{data.nasa_news_paragraph}}</p>
     </div>
 
