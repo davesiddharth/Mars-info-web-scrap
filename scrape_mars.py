@@ -25,7 +25,7 @@ def mars_news_scrape():
     #parse HTML with beautiful soup
     soup_nasa = bs(html, 'html.parser')
     # Extract title text
-    news_title = soup_nasa.find('li', class_='slide').find('div',class_='content_title').text
+    news_title = soup_nasa.find_all('div',class_='content_title')[1].text
     # Extract Paragraph text
     news_p = soup_nasa.find('div',class_='article_teaser_body').text
     
@@ -61,16 +61,22 @@ def mars_weather_scrape():
     browser = init_browser()
 
     url_mars_twitter = 'https://twitter.com/marswxreport?lang=en'
+    browser.visit(url_mars_twitter)
     page = requests.get(url_mars_twitter)
-    soup_mars_twitter = bs(page.text, "html.parser")
 
-    mars_weather = soup_mars_twitter.find_all('div', class_='js-tweet-text-container')
+    browser.find_by_css('div[class="css-1dbjc4n r-1awozwy r-18u37iz r-1wtj0ep"').first.click()
+    html = browser.html
+    soup = bs(html, 'html.parser')
+
+    mars_weather = soup.find_all("span",class_="css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0")
+
     filtered_weather_tweets=[]
 
-    for weather in mars_weather:
-        if "low" in weather.p.text and "high" in weather.p.text and "winds" in weather.p.text and "pressure" in weather.p.text:
-            filtered_weather_tweets.append(weather.p.text)
-    weather_tweet = filtered_weather_tweets[0]
+    for n in range(8):
+        if "low" in mars_weather[n].text and "high" in mars_weather[n].text and "winds" in mars_weather[n].text and "pressure" in mars_weather[n].text:
+            filtered_weather_tweets.append(mars_weather[n].text)
+
+    weather_tweet=filtered_weather_tweets[0]
 
     print(f"mars_weather {weather_tweet}")
     mars_data['mars_weather'] = weather_tweet
